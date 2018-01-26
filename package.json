@@ -1,0 +1,20 @@
+{
+  "name": "airship",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+
+  },
+  "author": "Narek Abovyan",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^8.0.47",
+    "typescript": "^2.6.1",
+    "typings": "^2.1.0"
+  },
+  "dependencies": {
+    "diet": "^0.10.8",
+    "reflect-metadata": "^0.1.9",
+  }
+}
