@@ -23,7 +23,7 @@ Let's imagine that we need a web server with just one method `/randomInt` which 
 
 First of all, we need to write our request and response models:
 
-```typescript
+```ts
 export class RandomIntRequest extends ASRequest {
     @json()
     public readonly min: number
@@ -49,7 +49,7 @@ So, it's pretty simple, we just created a class that extends from base request c
 
 Response model is also very simple and extends from base response model.
 
-```typescript
+```ts
 export class RandomIntResponse extends ASResponse {
     @json()
     public readonly integer: number
@@ -64,7 +64,7 @@ export class RandomIntResponse extends ASResponse {
 
 Now we need to write a handler for our method, it's also very simple, we just need to write a class that extends from `BaseRequestHandler` class and implement two methods:
 
-```typescript
+```ts
 export class RandomIntHandler extends BaseRequestHandler {
     public async handle(request: RandomIntRequest): Promise<RandomIntResponse> {
 
@@ -83,7 +83,7 @@ handle method gets an instance of our request method and returns an instance of 
 
 Now we just need to set this up:
 
-```typescript
+```ts
 let logger = new ConsoleLogger()
 
 const server = new AirshipAPIServer({
@@ -113,7 +113,7 @@ The last thing we need to do is start the server, that's it!
 
 Let's start with example:
 
-```typescript
+```ts
 class Square {
     public width: number
 
@@ -131,7 +131,7 @@ class Square {
 
 Here we have simple Square model, first of all if we want this model to be serializable - we need to implement `ISerializable` interface:
 
-```typescript
+```ts
 class Square implements ISerializable {
     public width: number
 
@@ -149,7 +149,7 @@ class Square implements ISerializable {
 
 Now we need to point our fields using `@serializable` decorator:
 
-```typescript
+```ts
 class Square implements ISerializable {
     @serializable()
     public width: number
@@ -169,7 +169,7 @@ class Square implements ISerializable {
 
 `@serializable` decorator is pretty simple:
 
-```typescript
+```ts
 serializable(name?: string, arrayType?: Function)
 ```
 
@@ -177,7 +177,7 @@ name - is the name of your property, you can leave it empty & system will automa
 
 `arrayType` - since typescript cant provide us type of array items you should pass it yourself, for example if you have property ids: number[] - `@serializable` call should look like this:
 
-```typescript
+```ts
 @serializable('ids', Number)
 public ids: number[]
 ```
@@ -186,7 +186,7 @@ Now we can serialize and `deserialize` our model, there is a `BaseSerializer` cl
 
 There are two methods that we need:
 
-```typescript
+```ts
 public static serialize(entity: ISerializable): Object
 
 public static deserialize<T extends ISerializable>(
@@ -197,13 +197,13 @@ public static deserialize<T extends ISerializable>(
 
 First one gets your model instance and serializes in, second one `deserializes` it:
 
-```typescript
+```ts
 JSONSerializer.serialize(new Square(10, 10))
 // { "width": 10, "height": 10 }
 ```
 
 
-```typescript
+```ts
 JSONSerializer.deserialize(Square, { "width": 10, "height": 10 })
 // Square { width: 10, height: 10 }
 ```
