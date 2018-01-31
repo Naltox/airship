@@ -55,7 +55,7 @@ export default class AirshipAPIServer {
                 this._config.statisticsCounter.doneRequest()
         }
         catch (e) {
-            console.log(e)
+            console.error(e)
 
             if (e instanceof ErrorResponse) {
                 answerRequest(e)

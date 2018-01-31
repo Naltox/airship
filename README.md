@@ -265,3 +265,106 @@ export default class UsersHandler extends MultiRequestHandler {
     }
 }
 ```
+
+All requests are subclasses of `ASRequest` and all responses are subclasses of `ASResponse`.
+There are two already implemented responses: 
+
+- ASSuccessResponse 
+- ASErrorResponse 
+
+# Cache
+
+There is a `BaseCache` abstract class which specifies basic caching capabilities:
+
+```ts
+export abstract class BaseCache<K, V> {
+    public abstract async cache(key: K, value: V|null, ttl?: number): Promise<void>
+
+    public abstract async get(key: K): Promise<V|undefined>
+
+    public abstract async getTTL(key: K): Promise<number>
+
+    public abstract async del(key: K): Promise<number>
+
+    public abstract async setnx(key: K, value: V): Promise<number>
+
+    public abstract async getset(key: K, value: V): Promise<V>
+
+    public abstract async expire(key: K, ttl: number): Promise<V>
+
+    public abstract async keys(key: string): Promise<V[]>
+
+    public abstract async exists(key: K): Promise<boolean>
+}
+```
+
+You can implement your own cache using this interface or you can use `MemoryCache` which implements `BaseCache` and stores data in memory (not all methods are implemented in `MemoryCache`). 
+`BaseCache` is not used in system, but it's may be useful in your project.
+
+# API Server
+
+Main logic for API Server is implemented at `AirshipAPIServer`, implementation is pretty simple: it just wait's for requests from `RequestsProvider`, passes them to `BaseRequestHandler` and returns responses back to `RequestsProvider`.
+
+To create server you need to pass config object to `AirshipAPIServer` constructor, config object must mach this interface: 
+
+```ts
+export interface AirshipAPIServerConfig {
+    // Your requests handler
+    requestsHandler: BaseRequestHandler,
+    // Your RequestsProvider e.g. HttpRequestsProvider
+    requestsProvider: RequestsProvider,
+    // optional statistics counter
+    statisticsCounter?: BaseStatisticsCounter,
+    // optional logger
+    logger?: BaseLogger
+}
+```
+
+Because `AirshipAPIServer` uses just one request handler it's expected that handler is capable of handling all types of request of your system.
+There is a subclass of `BaseRequestHandler` called `RequestHandlerManager` for that purposes. `RequestHandlerManager` receives array of all of your handlers and passes each request to handler that supports it. 
+
+# Requests provider
+
+Request provider is a component thet provides requests to `AirshipAPIServer`. There is a `RequestsProvider` class: 
+
+```ts
+export abstract class RequestsProvider {
+    public abstract getRequests(
+        callback: (
+            request: ASRequest,
+            answerRequest: (response: ASResponse) => void
+        ) => void
+    ): void
+}
+```
+
+`getRequests` method is called by `AirshipAPIServer` to subscribe to requests, response for request is returned by `AirshipAPIServer` to `answerRequest` function.
+
+At this moment we have requests provider for http: `HttpRequestsProvider`, it uses `dietjs` module for networking.
+Usage is pretty simple: 
+
+```ts
+new HttpRequestsProvider(
+        logger, // instance of BaseLogger
+        7000,   // port
+
+        // list of your requests
+        GetUserRequest,
+        SaveUserRequest
+    )
+```
+
+Feel free to create more requests providers!
+
+# Statistics
+
+If you pass subclass of `BaseStatisticsCounter` to `AirshipAPIServer` server will call `countRequestHit` when request comes and `doneRequest` when request handled.
+There is a subclass called `LocalStatisticsCounter` which prints stats using your logger:
+
+```ts
+let statsCounter = new LocalStatisticsCounter(
+    logger,
+    false, // silence flag, handy for debugging
+    1000 * 60 // logFrequency in ms, default is 5000 
+)
+```
