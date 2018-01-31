@@ -1,4 +1,4 @@
-# Airship Server
+# Airship
 
 # Introduction
 Airship is a framework for Node.JS & TypeScript that helps you to write big, scalable and maintainable API servers.

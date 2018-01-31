@@ -9,7 +9,8 @@
     "emitDecoratorMetadata": true,
     "allowJs": false,
     "strict": true,
-    "declaration": true
+    "declaration": true,
+    "pretty": true
   },
   "include": [
     "src/**/*"
