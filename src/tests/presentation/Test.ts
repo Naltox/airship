@@ -1,6 +1,6 @@
 
 import {BaseSerializer, ISerializable, serializable} from "../../modules/serialize/BaseSerializer";
-import JSONSerializer from "../../modules/serialize/JSONSerializator";
+import JSONSerializer from "../../modules/serialize/JSONSerializer";
 
 class User implements ISerializable {
     @serializable()

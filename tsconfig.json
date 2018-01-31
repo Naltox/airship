@@ -7,8 +7,9 @@
     "module": "commonjs",
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
-    "allowJs": true,
-    "strict": true
+    "allowJs": false,
+    "strict": true,
+    "declaration": true
   },
   "include": [
     "src/**/*"

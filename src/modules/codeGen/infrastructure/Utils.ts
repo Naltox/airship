@@ -1,3 +1,5 @@
+export type Wrapper<T> = { [P in keyof T]: T[P] }
+
 export function toCamelCase(str: string, capitalize: boolean = false, separator = '_') {
     const parts = str.split(separator)
 

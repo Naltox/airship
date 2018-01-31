@@ -1,4 +1,5 @@
 import "reflect-metadata"
+import { Wrapper } from "../../../codeGen/infrastructure/Utils";
 
 export function queryPath(path: string, type?: string) {
     return (target: any) => {
@@ -17,6 +18,8 @@ export function queryPath(path: string, type?: string) {
             constructor.queryType[constructor.name] = type
     }
 }
+
+export type ASRequestType = Wrapper<typeof ASRequest>
 
 export class ASRequest {
     public static queryPath: string

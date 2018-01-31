@@ -1,18 +1,15 @@
 import {BaseRequestHandler} from "../domain/BaseRequestHandler";
 import {ASResponse} from "../domain/entity/ASResponse";
-import {ASRequest} from "../domain/entity/ASRequest";
+import {ASRequest, ASRequestType} from "../domain/entity/ASRequest";
+import { Wrapper } from "../../codeGen/infrastructure/Utils";
 
-type HandlerFunction = (request: ASRequest) => ASResponse
+export type HandlerFunction = (request: ASRequest) => ASResponse
 
-type Wrapper<T> = { [P in keyof T]: T[P] }
-
-type RequestType = Wrapper<typeof ASRequest>
-
-type MultiRequestHandlerType = Wrapper<typeof MultiRequestHandler>
+export type MultiRequestHandlerType = Wrapper<typeof MultiRequestHandler>
 
 export abstract class MultiRequestHandler extends BaseRequestHandler {
 
-    private static handlers: Map<Function, Map<RequestType, HandlerFunction>> = new Map()
+    private static handlers: Map<Function, Map<ASRequestType, HandlerFunction>> = new Map()
 
     public async handle(request: ASRequest): Promise<ASResponse> {
         let classHandlers = MultiRequestHandler.handlers.get(this.constructor)
@@ -30,7 +27,7 @@ export abstract class MultiRequestHandler extends BaseRequestHandler {
         )
     }
 
-    public addHandler(request: RequestType, handlerClass: () => MultiRequestHandlerType, handlerFunction: HandlerFunction) {
+    public addHandler(request: ASRequestType, handlerClass: () => MultiRequestHandlerType, handlerFunction: HandlerFunction) {
         if (!MultiRequestHandler.handlers.has(handlerClass))
             MultiRequestHandler.handlers.set(handlerClass, new Map())
 
@@ -38,7 +35,7 @@ export abstract class MultiRequestHandler extends BaseRequestHandler {
     }
 }
 
-export function handles<T extends MultiRequestHandler>(request: RequestType) {
+export function handles<T extends MultiRequestHandler>(request: ASRequestType) {
     return (target: T, propertyKey: string) => {
         let handler = (target as any)[propertyKey] as HandlerFunction
 

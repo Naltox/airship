@@ -6,7 +6,7 @@ import {ASResponse} from "../domain/entity/ASResponse";
 import ErrorResponse from "../domain/entity/ASErrorResponse";
 import {BaseStatisticsCounter} from "../../statistics/domain/BaseStatisticsCounter";
 
-interface AirshipAPIServerConfig {
+export interface AirshipAPIServerConfig {
     requestsHandler: BaseRequestHandler,
     requestsProvider: RequestsProvider,
     statisticsCounter?: BaseStatisticsCounter,

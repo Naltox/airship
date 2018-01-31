@@ -1,18 +1,14 @@
 import {RequestsProvider} from "../domain/RequestsProvider";
-import {ASRequest} from "../domain/entity/ASRequest";
+import {ASRequest, ASRequestType} from "../domain/entity/ASRequest";
 import {ASResponse} from "../domain/entity/ASResponse";
 import ErrorResponse from "../domain/entity/ASErrorResponse";
 import BaseLogger from "../../logger/domain/BaseLogger";
-import JSONSerializer from "../../serialize/JSONSerializator";
+import JSONSerializer from "../../serialize/JSONSerializer";
 const Diet = require('diet')
-
-type Wrapper<T> = { [P in keyof T]: T[P] }
-
-type RequestType = Wrapper<typeof ASRequest>
 
 export default class HttpRequestsProvider extends RequestsProvider {
     private _app: any
-    private _supportedRequests: RequestType[]
+    private _supportedRequests: ASRequestType[]
     private _logger: BaseLogger
 
     private _requestsCallback: ((
@@ -23,7 +19,7 @@ export default class HttpRequestsProvider extends RequestsProvider {
     constructor(
         logger: BaseLogger,
         port: number,
-        ...supportedRequests: RequestType[]
+        ...supportedRequests: ASRequestType[]
     ) {
         super()
         this._logger = logger
@@ -39,13 +35,13 @@ export default class HttpRequestsProvider extends RequestsProvider {
         this._logger.log(
             'HttpRequestsProvider supported requests:\n',
             supportedRequests
-                .map(r => r.prototype.constructor.name)
+                .map(r => (r as any).prototype.constructor.name)
                 .join('\n')
         )
 
         this._supportedRequests.forEach(request => {
-            let queryPath = request.getQueryPath()
-            let type = request.getQueryType()
+            let queryPath = (request as any).getQueryPath()
+            let type = (request as any).getQueryType()
 
             this.setupMethod(
                 request,
