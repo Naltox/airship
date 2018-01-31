@@ -209,3 +209,20 @@ JSONSerializer.deserialize(Square, { "width": 10, "height": 10 })
 ```
 
 `deserialize` method also does type checking and existing checking.
+
+
+# Logger
+
+There is a `BaseLogger` interface that specifies basic logging capabilities: 
+
+```ts
+export default interface BaseLogger {
+    log(prefix: string, data?: any, recursiveDepth?: boolean): void
+
+    warn(prefix: string, data?: any, recursiveDepth?: boolean): void
+
+    error(prefix: string, data?: any, recursiveDepth?: boolean): void
+}
+```
+
+You can implement your own logger using this interface or you can use `ConsoleLogger` which implements `BaseLogger` and writes logs to `stdout` & `stderr`
