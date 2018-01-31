@@ -226,3 +226,43 @@ export default interface BaseLogger {
 ```
 
 You can implement your own logger using this interface or you can use `ConsoleLogger` which implements `BaseLogger` and writes logs to `stdout` & `stderr`
+
+# Handlers
+
+There are two ways to write handlers at this moment. The first option is to extend  `BaseRequestHandler`: 
+
+```ts 
+export default class TestHandler extends BaseRequestHandler {
+    // here you handle request and return response
+    // it's better to specify concrete types of request & response
+    public async handle(request: TestRequest): Promise<SuccessResponse|ErrorResponse> {
+        return new SuccessResponse()
+    }
+
+    // here you must return true if you support request 
+    public supports(request: Request): boolean {
+        return request instanceof TestRequest
+    }
+}
+```
+
+Because `BaseRequestHandler` is on great for handling multiply request - there is an subclass of it called `MultiRequestHandler`.
+You can use `MultiRequestHandler` like this: 
+
+```ts
+
+export default class UsersHandler extends MultiRequestHandler {
+    // here you pass your request class to handles decorator
+    @handles(GetUserRequest)
+    // all GetUserRequest`s will be passed to this method at this moment
+    public async handleGetUser(request: GetUserRequest): Promise<ASResponse> {
+        
+    }
+
+    @handles(SaveUserRequest)
+    public async handleSaveUser(request: SaveUserRequest): Promise<ASResponse> {
+    
+    }
+}
+```
+
