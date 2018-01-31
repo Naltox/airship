@@ -15,6 +15,6 @@
   },
   "dependencies": {
     "diet": "^0.10.8",
-    "reflect-metadata": "^0.1.9",
+    "reflect-metadata": "^0.1.9"
   }
 }
