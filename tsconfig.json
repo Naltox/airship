@@ -17,8 +17,6 @@
   ],
   "exclude": [
     "node_modules",
-    "**/*.spec.ts",
-    "src/sdk",
-    "src/scheme"
+    "**/*.spec.ts"
   ]
 }
