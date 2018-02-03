@@ -1,5 +1,5 @@
 {
-  "name": "airship",
+  "name": "airship-server",
   "version": "1.0.0",
   "description": "",
   "main": "build/index.js",
