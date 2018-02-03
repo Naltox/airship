@@ -1,2 +1,2 @@
 #!/usr/bin/env node
-require('../build/modules/schemeGenerator/AirshipSchemeGeneratorApplication.js')
+require('../build/modules/schemeGenerator/presentation/AirshipSchemeGeneratorApplication.js')
