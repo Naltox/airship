@@ -17,7 +17,9 @@
   },
   "homepage": "https://github.com/Naltox/airship",
   "bin": {
-    "aschemegen": "./bin/aschemegen"
+    "aschemegen": "./bin/aschemegen",
+    "asdkgen": "./bin/asdkgen",
+    "asdocgen": ".bin/asdocgen"
   },
   "author": "Narek Abovyan <xeroxaltox@gmail.com>",
   "license": "MIT",
