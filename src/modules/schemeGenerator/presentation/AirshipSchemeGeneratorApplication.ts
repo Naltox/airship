@@ -3,8 +3,6 @@ import ConsoleLogger from "../../logger/infrustructure/ConsoleLogger";
 import AirshipSchemeGenerator from "../application/AirshipSchemeGenerator";
 import AirshipApiSchemeGenerator from "../infrastructure/AirshipApiSchemeGenerator";
 import {deepEqual} from "assert";
-import {ASRequest} from "../../apiServer/domain/entity/ASRequest";
-import {ASResponse} from "../../apiServer/domain/entity/ASResponse";
 import {ApiServerConfig} from "../../apiServer/domain/ServerConfig";
 
 class AirshipSchemeGeneratorApplication extends BaseConsoleApplication {
@@ -31,7 +29,7 @@ class AirshipSchemeGeneratorApplication extends BaseConsoleApplication {
 
 
         if (!path || !configPath)
-            this.die('usage: --o=<output_path> --c=<config>')
+            this.die(`usage: --o=<output_path> --c=<config>\n\noutput_path: absolute output path\nconfig: absolute path to config`)
 
         let config: ApiServerConfig = require(configPath).default
 
@@ -42,8 +40,6 @@ class AirshipSchemeGeneratorApplication extends BaseConsoleApplication {
             .map(f => f.replace('api-scheme-v', '').replace('.json', ''))
             .sort()
 
-
-        console.log(config.endpoints[0])
 
         let generator = new AirshipSchemeGenerator(
             airshipApiSchemeGenerator,

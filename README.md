@@ -368,3 +368,32 @@ let statsCounter = new LocalStatisticsCounter(
     1000 * 60 // logFrequency in ms, default is 5000 
 )
 ```
+
+# Generating api scheme
+
+What is api scheme? It's a json file which describes your server models, responses and requests. Api scheme is used to generate client adk & docs.
+To generate scheme first you need to create config file which implements `ApiServerConfig` interface:
+
+```ts
+import {AirshipAPIServerConfig} from "airship-server"
+
+const config: ApiServerConfig = {
+    endpoints: [
+        [TestRequest, TestResponse],
+        [GetUserRequest, GetUserResponse]
+    ]
+}
+
+export default config
+```
+
+`endpoints` is just and array of request response pairs.
+
+After you done with that you can use `aschemegen` tool to generate scheme:
+
+```bash
+node_modules/.bin/aschemegen  --o=/Users/altox/Desktop/test-server/scheme  --c=/Users/altox/Desktop/test-server/build/config.js
+```
+
+`o` argument is the absolute path where scheme will be saved
+`c` argument is the absolute path of compiled config file
