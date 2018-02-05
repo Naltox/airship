@@ -16,8 +16,7 @@ export {default as ConsoleLogger} from './modules/logger/infrustructure/ConsoleL
 /**
  * apiServer
  */
-
-export {default as AirshipAPIServer} from './modules/apiServer/application/AirshipAPIServer'
+export {default as AirshipAPIServer, AirshipAPIServerConfig} from './modules/apiServer/application/AirshipAPIServer'
 export {default as ASErrorResponse} from './modules/apiServer/domain/entity/ASErrorResponse'
 export * from './modules/apiServer/domain/entity/ASRequest'
 export * from './modules/apiServer/domain/entity/ASResponse'
