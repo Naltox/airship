@@ -17,6 +17,17 @@ Main features:
 # Basic concepts
 The main idea is very simple, every request has its model (its just a class), every response has a model too. To handle request there is a component called `RequestHandler`, every request handler handles a specific request and returns specific response. Its important that at this point whole system does not even know anything about the network and it should not. Because of that, your system is very abstract, it just handles specified requests and returns specified responses. This gives you the ability to change your network protocol or even stop using your system like a web server and use it as a part of local UI application.
 
+## Installation
+
+To install the stable version:
+
+```bash
+npm install --save airship-server
+```
+
+This assumes you are using [npm](https://www.npmjs.com/) as your package manager.
+If you don’t, you can access these files on [unpkg](https://unpkg.com/airship-server/), download them, or point your package manager to them.
+
 
 # Basic example
 Let's imagine that we need a web server with just one method `/randomInt` which returns a random integer in range.
