@@ -35,11 +35,12 @@ Let's imagine that we need a web server with just one method `/randomInt` which 
 First of all, we need to write our request and response models:
 
 ```ts
+@queryPath('/getRandomInt')
 export class RandomIntRequest extends ASRequest {
-    @json()
+    @serializable()
     public readonly min: number
 
-    @json()
+    @serializable()
     public readonly  max: number
 
     constructor(
@@ -54,7 +55,8 @@ export class RandomIntRequest extends ASRequest {
 }
 ```
 
-So, it's pretty simple, we just created a class that extends from base request class and have `from` and `to` properties. The only interesting thing is using of `@json()` decorator,  it's used to have the ability to serialize and deserialize our model.
+So, it's pretty simple, we just created a class that extends from base request class and have `from` and `to` properties. The only interesting thing is using of `@serializable()` decorator,  it's used to have the ability to serialize and deserialize our model.
+And we also setting query path using `@queryPath` decorator, that string will be used for URL in HTTP & for methods names in SDK
 
 
 
@@ -62,7 +64,7 @@ Response model is also very simple and extends from base response model.
 
 ```ts
 export class RandomIntResponse extends ASResponse {
-    @json()
+    @serializable()
     public readonly integer: number
 
     constructor(integer: number) {
@@ -79,7 +81,7 @@ Now we need to write a handler for our method, it's also very simple, we just ne
 export class RandomIntHandler extends BaseRequestHandler {
     public async handle(request: RandomIntRequest): Promise<RandomIntResponse> {
 
-        let randomInt = Math.random() * (request.max - request.min) + request.min
+        let randomInt = Math.round(Math.random() * (request.max - request.min) + request.min)
 
         return new RandomIntResponse(randomInt)
     }

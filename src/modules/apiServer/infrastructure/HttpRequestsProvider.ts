@@ -41,11 +41,10 @@ export default class HttpRequestsProvider extends RequestsProvider {
 
         this._supportedRequests.forEach(request => {
             let queryPath = (request as any).getQueryPath()
-            let type = (request as any).getQueryType()
 
             this.setupMethod(
                 request,
-                type,
+                'post',
                 queryPath
             )
         })
