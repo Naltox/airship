@@ -19,7 +19,7 @@
   "bin": {
     "aschemegen": "./bin/aschemegen",
     "asdkgen": "./bin/asdkgen",
-    "asdocgen": ".bin/asdocgen"
+    "asdocgen": "./bin/asdocgen"
   },
   "author": "Narek Abovyan <xeroxaltox@gmail.com>",
   "license": "MIT",
