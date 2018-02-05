@@ -391,7 +391,7 @@ export default config
 
 After you done with that you can use `aschemegen` tool to generate scheme:
 
-```bash
+```sh
 node_modules/.bin/aschemegen  --o=/Users/altox/Desktop/test-server/scheme  --c=/Users/altox/Desktop/test-server/build/config.js
 ```
 
@@ -402,7 +402,7 @@ node_modules/.bin/aschemegen  --o=/Users/altox/Desktop/test-server/scheme  --c=/
 
 To generate client SDK you just need to run `asdkgen` and pass to it path to your api schemes and output path:
 
-```ts
+```sh
 node_modules/.bin/asdkgen --s=/Users/altox/Desktop/test-server/scheme --o=/Users/altox/Desktop/test-server/sdk
 ```
 
@@ -413,7 +413,7 @@ SDK uses `fetch`, so you might need some polyfill.
 
 Generating docs is just like generating SDK, but you want to use `asdocgen`:
 
-```ts
+```sh
 node_modules/.bin/asdocgen --s=/Users/altox/Desktop/test-server/scheme --o=/Users/altox/Desktop/test-server/docs
 ```
 
