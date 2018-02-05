@@ -1,6 +1,6 @@
 {
   "name": "airship-server",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "Airship is a framework for Node.JS & TypeScript that helps you to write big, scalable and maintainable API servers.",
   "main": "build/index.js",
   "types": "build/index.d.ts",
