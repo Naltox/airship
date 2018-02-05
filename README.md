@@ -397,3 +397,24 @@ node_modules/.bin/aschemegen  --o=/Users/altox/Desktop/test-server/scheme  --c=/
 
 `o` argument is the absolute path where scheme will be saved
 `c` argument is the absolute path of compiled config file
+
+# Generating client SDK
+
+To generate client SDK you just need to run `asdkgen` and pass to it path to your api schemes and output path:
+
+```ts
+node_modules/.bin/asdkgen --s=/Users/altox/Desktop/test-server/scheme --o=/Users/altox/Desktop/test-server/sdk
+```
+
+SDK is fully statically typed and written in TypeScript, so you can use it in your TS projects and you can compile it and use in your JS projects.
+SDK uses `fetch`, so you might need some polyfill.
+
+# Generating docs
+
+Generating docs is just like generating SDK, but you want to use `asdocgen`:
+
+```ts
+node_modules/.bin/asdocgen --s=/Users/altox/Desktop/test-server/scheme --o=/Users/altox/Desktop/test-server/docs
+```
+
+

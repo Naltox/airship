@@ -82,7 +82,7 @@ export default class AirshipApiSDKGenerator implements ApiSDKGenerator {
             .add(` *  Scheme version: ${config.schemeVersion}`)
             .add(' */')
             .add(`const API_PATH = '${config.apiPath}'`)
-            .add(`require('whatwg-fetch')`)
+            .add(``)
             .add(`import * as Responses from './Responses'`)
             .add(`import * as MethodsProps from './MethodsProps'`)
             .add('')

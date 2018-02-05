@@ -23,7 +23,7 @@ class DocsGeneratorApplication extends BaseConsoleApplication {
         let outPath = args['o']
 
         if (!schemePath || !outPath)
-            this.die('usage: --s=<scheme_file> --c=<output_path>')
+            this.die('usage: --s=<schemes_path> --o=<output_path>')
 
         let logger = new ConsoleLogger()
 
