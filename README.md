@@ -1,6 +1,8 @@
 # Airship
 
-![airship](airship.png)
+<center>
+<img src="airship.png" height="440" width="440">
+</center>
 
 # Introduction
 Airship is a framework for Node.JS & TypeScript that helps you to write big, scalable and maintainable API servers.
