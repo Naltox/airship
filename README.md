@@ -1,8 +1,9 @@
 
 <p align="center">
-<img src="airship.png" height="123" width="123">
-### Airship
+    <img src="airship.png" height="123" width="123">
 </p>
+
+# Airship
 
 # Introduction
 Airship is a framework for Node.JS & TypeScript that helps you to write big, scalable and maintainable API servers.
