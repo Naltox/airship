@@ -9,7 +9,7 @@ export {default as JSONSerializer} from './modules/serialize/JSONSerializer'
  * logger
  */
 
-export {default as BaseLogger} from './modules/logger/domain/BaseLogger'
+export {default as BaseLoggera} from './modules/logger/domain/BaseLogger'
 export {default as ConsoleLogger} from './modules/logger/infrustructure/ConsoleLogger'
 
 
